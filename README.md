@@ -168,7 +168,7 @@ Planned extensions:
 
 ## 👤 Author
 
-**Craig Ngwena**  
+**Sean Craig Ngwenya**  
 AI & Software Engineering Student  
 Focus: LLMs, automation, intelligent systems
 
