@@ -5,6 +5,8 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "agents>=1.4.0",
+    "asyncio>=4.0.0",
     "ipykernel>=7.1.0",
     "ollama>=0.6.1",
     "openai>=2.14.0",
