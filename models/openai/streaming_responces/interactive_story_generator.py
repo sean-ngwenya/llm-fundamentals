@@ -1,12 +1,10 @@
-import sys
 import time
-from pathlib import Path
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
 
-
-src_path = Path(__file__).parent.parent
-sys.path.insert(0, str(src_path))
-
-from config.openai_client import get_client
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 def conversation():
@@ -52,7 +50,7 @@ def total_tokens(usage):
     print("=" * 35)
 
 
-def story_gen(client=get_client(), delay=0.02):
+def story_gen(client, delay=0.02):
     print("=" * 10 + "STORY GENERATOR" + "=" * 10)
 
     try:
@@ -66,4 +64,4 @@ def story_gen(client=get_client(), delay=0.02):
 
 
 if __name__ == "__main__":
-    story_gen()
+    story_gen(client=client)

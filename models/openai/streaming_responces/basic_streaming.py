@@ -1,14 +1,12 @@
-import sys
-from pathlib import Path
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
 
-# Add the src directory to the Python path
-src_path = Path(__file__).parent.parent / "src"
-sys.path.insert(0, str(src_path))
-# Now you can import openai_client
-from config.openai_client import get_client
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-def basic_streaming(client=get_client()):
+def basic_streaming(client):
     response = client.responses.create(
         model="gpt-4o-mini", input="Write a short scifi story. 300 words.", stream=True
     )
@@ -27,5 +25,5 @@ def basic_streaming(client=get_client()):
 
 
 if __name__ == "__main__":
-    message = basic_streaming()
+    message = basic_streaming(client=client)
     print("\n\nFull response received:\n", message)

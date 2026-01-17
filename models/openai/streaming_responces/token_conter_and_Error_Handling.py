@@ -1,12 +1,12 @@
-import sys
-from pathlib import Path
-from config.openai_client import get_client
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
 
-src_path = Path(__file__).parent.parent
-sys.path.insert(0, str(src_path))
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-def token_count_streaming(client=get_client()):
+def token_count_streaming(client):
     tokens = 0
     try:
         response = client.responses.create(
@@ -26,4 +26,4 @@ def token_count_streaming(client=get_client()):
 
 
 if __name__ == "__main__":
-    token_count_streaming()
+    token_count_streaming(client=client)

@@ -27,7 +27,8 @@ def run(client):
                     print(block["text"])
 
 
-run(client=client)
+if __name__ == "__main__":
+    run(client=client)
 
 
 # OLD Chat completions API

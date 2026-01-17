@@ -1,14 +1,13 @@
-import sys
-from pathlib import Path
+import os
 import time
+from openai import OpenAI
+from dotenv import load_dotenv
 
-src_path = Path(__file__).parent.parent
-sys.path.insert(0, str(src_path))
-
-from config.openai_client import get_client
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-def type_writter_streaming(client=get_client(), delay=0.02):
+def type_writter_streaming(client, delay=0.02):
     response = client.responses.create(
         model="gpt-4o-mini", input="Write a short scifi story. 50 words.", stream=True
     )
@@ -23,4 +22,4 @@ def type_writter_streaming(client=get_client(), delay=0.02):
 
 
 if __name__ == "__main__":
-    type_writter_streaming()
+    type_writter_streaming(client=client)
