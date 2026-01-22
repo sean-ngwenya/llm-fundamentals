@@ -1,21 +1,18 @@
-import sys
-from pathlib import Path
 import pandas as pd
 import json
+from utils import search_by_id, search_users, get_database_tools
+import sys
+from pathlib import Path
 
-src_path = Path(__file__).parents[4] / "src"
+src_path = Path(__file__).parents[3] / "src"
 sys.path.insert(0, str(src_path))
 
-
-from config.utils import run
-from config.database_tools import search_by_id, search_users, get_database_tools
+from openai_utils import run
 
 
 def get_database():
-    input_file_path = "../../../../data/raw/users.csv"
-
-    with open(input_file_path, "r") as f:
-        data = pd.read_csv(f)
+    input_file_path = Path(__file__).parent / "data" / "users.csv"
+    data = pd.read_csv(input_file_path)
     return data.to_dict(orient="records")
 
 
