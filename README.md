@@ -1,177 +1,214 @@
-# LLM Fundamentals 🚀
-**Learning Large Language Models through Hands-On API Engineering**
+# LLM Fundamentals
+
+Hands-on exploration of Large Language Models (LLMs) using multiple providers, structured experimentation, and applied mini-projects.
+
+This repository documents a structured journey into LLM engineering, focusing on:
+
+* OpenAI API
+* Anthropic API
+* Local models via Ollama
+* Function calling
+* Structured outputs
+* Streaming responses
+* Applied mini-projects
+
+The goal is to understand model behavior from first principles while building clean, modular Python utilities that resemble real-world AI engineering workflows.
 
 ---
 
-## 📌 Overview
+## Repository Structure
 
-This repository documents my structured journey into **Large Language Model (LLM) engineering** using the OpenAI API.
-
-It focuses on **first principles**, clean Python architecture, and practical experimentation rather than black-box usage.
-
-The goal is to build a strong foundation for:
-- Prompt engineering
-- Conversational memory
-- Model behavior control
-- Future work with agents, tools, and autonomous systems
-
-This repository is **educational and experimental** by design.
-
----
-
-## 🧠 What This Repository Covers
-
-### ✅ Day 1 – First OpenAI API Calls
-- Making chat completions using the OpenAI API
-- Understanding system vs user prompts
-- Persona and behavior control
-- Conversation history (context retention)
-- Temperature and randomness control
-- Token usage inspection
-
-### ✅ Day 2 – LLM Fundamentals (Notebook)
-- Conceptual foundations of LLMs
-- Prompt structure and response shaping
-- Practical experiments in a Jupyter Notebook
-- Interactive exploration of model behavior
-
----
-
-## 📂 Repository Structure
 ```
 llm-fundamentals/
-├── README.md
-├── requirements.txt
-├── .env.example
-├── .gitignore
+├── data/
+│   └── raw/
+│
+├── exercises/
+│
+├── models/
+│   ├── anthropic/
+│   └── openai/
+│       ├── introduction/
+│       ├── streaming_responces/
+│       ├── structured_outputs/
+│       └── function_calling/
 │
 ├── notebooks/
-│   └── day2_fundamentals.ipynb
+│   ├── day2_fundamentals.ipynb
+│   └── openai_api.ipynb
 │
-└── src/
-    ├── __init__.py
-    │
-    ├── config/
-    │   ├── __init__.py
-    │   └── openai_client.py
-    │
-    ├── day01_first_calls/
-    │   ├── __init__.py
-    │   ├── simple_completion.py
-    │   ├── system_prompts.py
-    │   ├── conversation_memory.py
-    │   └── temperature_experiments.py
-    │
-    └── run_day01.py
+├── projects/
+│   ├── function_calling/
+│   │   ├── databse_query/
+│   │   └── smart_home_controller/
+│   └── structured_outputs/
+│
+├── src/
+│   ├── config/
+│   ├── openai_client.py
+│   ├── ollama_client.py
+│   └── openai_utils.py
+│
+├── main.py
+├── pyproject.toml
+├── requirements.txt
+├── uv.lock
+├── LICENSE
+└── README.md
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## Core Components
 
-### 1️⃣ Clone the Repository
+### 1. `models/`
+
+Contains API experiments organized by provider and capability.
+
+#### OpenAI
+
+* Introduction examples
+* Streaming response handling
+* Structured JSON outputs
+* Function calling patterns
+
+#### Anthropic
+
+* Claude-based experiments
+* Comparative behavior exploration
+
+---
+
+### 2. `src/`
+
+Reusable client abstractions and utilities.
+
+* `openai_client.py` – Wrapper around OpenAI API calls
+* `ollama_client.py` – Local model interaction via Ollama
+* `openai_utils.py` – Helper utilities for prompt handling and structured output parsing
+* `config/` – Configuration scaffolding
+
+This separation ensures experiments do not mix infrastructure logic with demonstration code.
+
+---
+
+### 3. `projects/`
+
+Applied mini-projects demonstrating real use cases:
+
+* **Function Calling**
+
+  * Database query assistant
+  * Smart home controller simulation
+
+* **Structured Outputs**
+
+  * Controlled JSON response workflows
+
+These simulate practical AI system design patterns.
+
+---
+
+### 4. `notebooks/`
+
+Exploratory and conceptual notebooks:
+
+* LLM fundamentals
+* API experimentation
+* Prompt-response mechanics
+
+Used for interactive experimentation and theory bridging.
+
+---
+
+## Installation
+
+### Option 1 – Using `uv` (Recommended)
+
 ```bash
-git clone https://github.com/sean-ngwenya/llm-fundamentals.git
-cd llm-fundamentals
+uv sync
 ```
 
-### 2️⃣ Create and Activate Virtual Environment
+### Option 2 – Using pip
+
 ```bash
-python3 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
-```
-
-### 3️⃣ Install Dependencies
-```bash
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Configure Environment Variables
-Create a `.env` file based on the example:
+---
+
+## Environment Variables
+
+Create a `.env` file if using API providers:
+
+```
+OPENAI_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here
+```
+
+If using Ollama locally:
+
+```
+ollama run mistral
+```
+
+Make sure Ollama is installed and running.
+
+---
+
+## Running the Project
+
+### Main Entry
+
 ```bash
-cp .env.example .env
+python main.py
 ```
 
-Add your OpenAI API key:
-```ini
-OPENAI_API_KEY=your_api_key_here
-```
-
-⚠️ **Never commit your `.env` file**
+Behavior depends on what is currently configured in `main.py`.
 
 ---
 
-## ▶️ Running the Code
+### Running Notebooks
 
-### Run Day 1 Experiments
-From the project root:
 ```bash
-python3 -m src.run_day01
-```
-
-This will sequentially execute:
-- Simple completion
-- Prompt persona experiments
-- Multi-turn conversation memory
-- Temperature comparisons
-
-### Open Day 2 Notebook
-```bash
-jupyter notebook notebooks/day2_fundamentals.ipynb
+jupyter notebook notebooks/
 ```
 
 ---
 
-## 📓 Notebook: Day 2 – LLM Fundamentals
+## Engineering Focus
 
-The Day 2 notebook focuses on:
-- Conceptual understanding of LLMs
-- Prompt → response mechanics
-- Controlled experimentation
-- Bridging theory with API behavior
+This repository emphasizes:
 
-This notebook complements the Python modules by allowing interactive exploration.
+* Provider abstraction
+* Clean client wrappers
+* Explicit prompt construction
+* Deterministic structured outputs
+* Tool/function calling workflows
+* Local vs hosted model comparison
 
----
-
-## 🧩 Design Philosophy
-
-- No hardcoded secrets
-- Modular Python packages
-- Explicit entry points
-- Clear separation between learning stages
-- Production-style structure even for experiments
-
-This mirrors real-world AI engineering workflows.
+It is intentionally organized in a modular way to resemble production AI systems, even though it is educational.
 
 ---
 
-## 🚧 What's Coming Next
+## Roadmap
 
-Planned extensions:
-- Prompt engineering patterns
-- Few-shot and structured outputs (JSON)
-- Embeddings and semantic search
-- Tool use and function calling
-- Autonomous task execution
-- Local vs API-based model comparison
-
----
-
-## 📜 Disclaimer
-
-- This repository is for **educational purposes only**
-- All experiments respect API usage policies
-- No sensitive data or credentials are included
+* Embeddings and semantic search
+* Retrieval-Augmented Generation (RAG)
+* Agent-style task orchestration
+* Evaluation pipelines
+* Cost tracking and token analysis
+* Model benchmarking (OpenAI vs Anthropic vs Ollama)
 
 ---
 
-## 👤 Author
+## Author
 
-**Sean Craig Ngwenya**  
-AI & Software Engineering Student  
-Focus: LLMs, automation, intelligent systems
+Sean Craig Ngwenya
+AI & Software Engineering Student
 
 ---
 
-⭐ If you find this repository useful or instructive, feel free to star it.
+If you are learning LLM engineering and want structured, incremental experimentation, this repository may serve as a practical reference.
